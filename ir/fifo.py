@@ -43,6 +43,8 @@ class ObjectFifoEndpoint:
     port: str
     
     def __post_init__(self) -> None:
+        if self.fifo is None:
+            raise ValueError("ObjectFifoEndpoint fifo cannot be None")
         if self.port not in ("Produce", "Consume"):
             raise ValueError(f"Invalid FIFO port: {self.port}")
         
