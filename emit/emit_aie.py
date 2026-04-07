@@ -2,6 +2,7 @@ from ir.program import Program
 from ir.worker import AcquireOp, ReleaseOp, KernelCallOp, LoopOp
 from .printer import Printer
 from .mlir_types import emit_memref_type
+from .emit_aiex import emit_aiex_runtime_block
 
 
 def _device_attr(kind: str) -> str:
@@ -111,6 +112,11 @@ def emit_aie_module(program: Program) -> str:
 
     printer.dedent()
     printer.writeln("}")
+    
+    runtime_text = emit_aiex_runtime_block(program)
+    if runtime_text.strip():
+        for line in runtime_text.rstrip("\n").split("\n"):
+            printer.writeln(line)
 
     printer.dedent()
     printer.writeln("}")

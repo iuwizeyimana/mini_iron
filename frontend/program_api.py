@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from . import __name__
+# from . import __name__
 
 from ir.symbols import Symbol
 from ir.types import DataType, TensorType
@@ -10,6 +10,7 @@ from ir.kernel import Kernel
 from ir.fifo import ObjectFifo, ObjectFifoEndpoint
 from ir.worker import Worker
 from ir.program import Program
+from ir.runtime import RuntimeSequence
 
 
 def dtype(name: str) -> DataType:
@@ -51,6 +52,11 @@ class ProgramBuilder:
         worker = Worker(sym=Symbol(name),placement=Placement(tile))
         self.program.add_worker(worker)
         return worker
+    
+    def runtime_sequence(self, name: str) -> RuntimeSequence:
+        seq = RuntimeSequence(sym=Symbol(name))
+        self.program.add_runtime_sequence(seq)
+        return seq
     
     def build(self) -> Program:
         return self.program

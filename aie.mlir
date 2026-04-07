@@ -22,5 +22,13 @@ module {
     }
     
   }
+  // ---- runtime sequence: run ----
+  func.func @run() {
+    // runtime: host -> fifo @inA from %host_A
+    // runtime: host -> fifo @inB from %host_B
+    // runtime: start workers [worker0]
+    // runtime: await workers [worker0]
+    // runtime: fifo @outC -> host %host_C
+    return
+  }
 }
-

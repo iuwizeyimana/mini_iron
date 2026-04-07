@@ -27,6 +27,6 @@ The folders are organized as follow:
 
 We have a simple example that can lower to MLIR-AIE (very infant stage at this point)
 
-run: python3 simple\_example.py  
+run: python3 cli.py  simple\_example.py --emit-mlir --output your\_out.mlir 
 
-the example\_output.txt file contains the example output from running the script
+the aie.mlir file contains the example output from running the script
