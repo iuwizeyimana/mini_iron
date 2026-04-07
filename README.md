@@ -17,13 +17,13 @@ IRON can be thought of as MLIR-AIE's python front end; its source code can be fo
 The frontend is used to create MLIR-AIE intermediate representation which undergo a further IR lowering, placement and routing passes and are finally converted into a set of binaries that are used to configure and program the NPU.
 
 
-The source code is quite developed which unfortunately means it take time to comprehend, hence why I am creating this small, simplified toolkit that mimic's IRON's python frontend. 
+The source code is quite developed which unfortunately means it take time to comprehend, hence why I am creating this small, simplified toolkit that mimics IRON's python frontend. 
 
 The folders are organized as follow:
-	*ir: Defines the core semantic objects (e.g.: ObjectFifo, Tile, etc)
-	*frontend: Uses the semantic objects to construct MLIR-AIE Intermediate Representations
-	*validate: Used to validate IR semantics
-	*emit: Used to emit MLIR-AIE dialects from the frontend ProgramBuilder
+* ir: Defines the core semantic objects (e.g.: ObjectFifo, Tile, etc)
+* frontend: Uses the semantic objects to construct MLIR-AIE Intermediate Representations
+* validate: Used to validate IR semantics
+* emit: Used to emit MLIR-AIE dialects from the frontend ProgramBuilder
 
 We have a simple example that can lower to MLIR-AIE (very infant stage at this point)
 
