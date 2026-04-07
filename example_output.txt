@@ -1,0 +1,26 @@
+module {
+  aie.device(AIEDevice.npu1_1col) {
+    %tile_shim = aie.tile(0, 0)
+    %tile_mem = aie.tile(0, 1)
+    %tile_core0 = aie.tile(0, 2)
+    
+    aie.external_func @matmul_i16_i32(memref<64x64xi16>, memref<64x64xi16>, memref<64x64xi32>)
+    
+    aie.object_fifo @inA(%tile_shim, %tile_core0, 2 : memref<64x64xi16>)
+    aie.object_fifo @inB(%tile_shim, %tile_core0, 2 : memref<64x64xi16>)
+    aie.object_fifo @outC(%tile_core0, %tile_shim, 2 : memref<64x64xi32>)
+    
+    aie.core(%tile_core0) {
+      // acquire inA Consume 1 as a
+      // acquire inB Consume 1 as b
+      // acquire outC Produce 1 as c
+      // call @matmul_i16_i32(a, b, c)
+      // release inA Consume 1
+      // release inB Consume 1
+      // release outC Produce 1
+      aie.end
+    }
+    
+  }
+}
+
