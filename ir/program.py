@@ -28,7 +28,7 @@ class Program:
     def add_fifo(self, fifo: ObjectFifo) -> None:
         self.fifos.append(fifo)
     def add_worker(self, worker: Worker) -> None:
-        self.workers.append(self.worker)
+        self.workers.append(worker)
         
     def find_tile(self, name: str) -> Optional[Tile]:
         for tile in self.tiles:
