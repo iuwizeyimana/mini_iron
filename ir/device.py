@@ -28,5 +28,11 @@ class DeviceModel:
         
         return DeviceModel(kind=kind, cols=cols, rows=rows)
     
+    def contains(self, col: int, row: int) -> bool:
+        return 0 <= col < self.cols and 0 <= row < self.rows
+
+    def __str__(self) -> str:
+        return f"{self.kind}[{self.cols}x{self.rows}]"
+    
     
     
