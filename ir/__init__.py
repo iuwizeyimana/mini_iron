@@ -1,4 +1,4 @@
-from .progam import Program
+from .program import Program
 
 __all__ = [
     "Symbol",
