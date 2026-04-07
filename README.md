@@ -19,3 +19,14 @@ The frontend is used to create MLIR-AIE intermediate representation which underg
 
 The source code is quite developed which unfortunately means it take time to comprehend, hence why I am creating this small, simplified toolkit that mimic's IRON's python frontend. 
 
+The folders are organized as follow:
+	*ir: Defines the core semantic objects (e.g.: ObjectFifo, Tile, etc)
+	*frontend: Uses the semantic objects to construct MLIR-AIE Intermediate Representations
+	*validate: Used to validate IR semantics
+	*emit: Used to emit MLIR-AIE dialects from the frontend ProgramBuilder
+
+We have a simple example that can lower to MLIR-AIE (very infant stage at this point)
+
+run: python3 simple\_example.py  
+
+the example\_output.txt file contains the example output from running the script
