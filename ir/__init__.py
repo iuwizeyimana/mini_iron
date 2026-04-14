@@ -4,6 +4,7 @@ from .device import DeviceModel
 from .placement import Tile, Placement
 from .kernel import Kernel
 from .fifo import ObjectFifo, ObjectFifoEndpoint
+from .fifo_link import FifoLink
 from .worker import (
     Worker,
     WorkerOp,
@@ -33,6 +34,7 @@ __all__ = [
     "Kernel",
     "ObjectFifo",
     "ObjectFifoEndpoint",
+    "FifoLink",
     "Worker",
     "WorkerOp",
     "AcquireOp",

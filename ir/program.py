@@ -4,6 +4,7 @@ from .device import DeviceModel
 from .placement import Tile
 from .kernel import Kernel
 from .fifo import ObjectFifo
+from .fifo_link import FifoLink
 from .worker import Worker
 from .runtime import RuntimeSequence
 
@@ -17,6 +18,7 @@ class Program:
     tiles: List[Tile] = field(default_factory=list)
     kernels: List[Kernel] = field(default_factory=list)
     fifos: List[ObjectFifo] = field(default_factory=list)
+    fifo_links: List[FifoLink] = field(default_factory=list)
     workers: List[Worker] = field(default_factory=list)
     runtime_sequences: List[RuntimeSequence] = field(default_factory=list)
     
@@ -29,6 +31,9 @@ class Program:
     
     def add_fifo(self, fifo: ObjectFifo) -> None:
         self.fifos.append(fifo)
+    
+    def add_fifo_link(self, link: FifoLink) -> None:
+        self.fifo_links.append(link)
         
     def add_worker(self, worker: Worker) -> None:
         self.workers.append(worker)
@@ -52,6 +57,12 @@ class Program:
         for fifo in self.fifos:
             if fifo.name == name:
                 return fifo
+        return None
+    
+    def find_fifo_link(self, name: str) -> Optional[FifoLink]:
+        for link in self.fifo_links:
+            if link.name == name:
+                return link
         return None
     
     def find_worker(self, name: str) -> Optional[Worker]:

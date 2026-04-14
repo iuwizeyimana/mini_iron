@@ -8,6 +8,7 @@ from ir.device import DeviceModel
 from ir.placement import Tile, Placement
 from ir.kernel import Kernel
 from ir.fifo import ObjectFifo, ObjectFifoEndpoint
+from ir.fifo_link import FifoLink
 from ir.worker import Worker
 from ir.program import Program
 from ir.runtime import RuntimeSequence
@@ -47,6 +48,11 @@ class ProgramBuilder:
         fifo = ObjectFifo(sym=Symbol(name), producer=producer, consumers=consumers, depth=depth, elem_type=elem_type)
         self.program.add_fifo(fifo)
         return fifo
+    
+    def fifo_link(self, name: str, src: ObjectFifo, dst: ObjectFifo) -> FifoLink:
+        link = FifoLink(sym=Symbol(name), src=src, dst=dst)
+        self.program.add_fifo_link(link)
+        return link
     
     def worker(self, name: str, tile: Tile)-> Worker:
         worker = Worker(sym=Symbol(name),placement=Placement(tile))
