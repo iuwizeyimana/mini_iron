@@ -1,5 +1,5 @@
 # mini_iron
-Educational toolkit inspired by MLIR-AIE IRON to understand the using MLIR for HW description
+Educational toolkit inspired by MLIR-AIE IRON to understand using MLIR for HW description
 
 
 [MLIR AIE](https://github.com/Xilinx/mlir-aie) is an [IREE](https://github.com/iree-org/iree) inspired MLIR toolchain used to program AMD's XDNA NPUs.
@@ -22,8 +22,9 @@ The source code is quite developed which unfortunately means it take time to com
 The folders are organized as follow:
 * ir: Defines the core semantic objects (e.g.: ObjectFifo, Tile, etc)
 * frontend: Uses the semantic objects to construct MLIR-AIE Intermediate Representations
-* validate: Used to validate IR semantics
-* emit: Used to emit MLIR-AIE dialects from the frontend ProgramBuilder
+* validate: Is used to validate IR semantics
+* emit: Is used to emit MLIR-AIE dialects from the frontend ProgramBuilder
+* build: Contains scripts to lower the python files into MLIR AIE, compiler the cpp kernels and call aiecc to build the xclbins binaries for the NPU
 
 We have a simple example that can lower to MLIR-AIE (very infant stage at this point)
 
