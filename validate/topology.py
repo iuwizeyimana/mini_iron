@@ -9,6 +9,9 @@ def _tile_names(program: Program) -> set[str]:
 def _kernel_names(program: Program) -> set[str]:
     return {k.name for k in program.kernels}
 
+def _fifo_names(program: Program) -> set[str]:
+    return {f.name for f in program.fifos}
+
 
 def _validate_worker_ops(worker, kernel_names: set[str]) -> None:
     for op in worker.body:
@@ -35,6 +38,7 @@ def _validate_loop_body(worker_name: str, loop_op: LoopOp, kernel_names: set[str
 def validate_topology(program: Program) -> None:
     tile_names = _tile_names(program)
     kernel_names = _kernel_names(program)
+    fifo_names = _fifo_names(program)
 
     for fifo in program.fifos:
         if fifo.producer.name not in tile_names:
@@ -46,6 +50,16 @@ def validate_topology(program: Program) -> None:
                 raise ValueError(
                     f"FIFO '{fifo.name}' consumer tile '{consumer.name}' is not in program.tiles"
                 )
+        
+    for link in program.fifo_links:
+        if link.src.name not in fifo_names:
+            raise ValueError(
+                f"FIFO link '{link.name}' references unknown source FIFO '{link.src.name}'"
+            )
+        if link.dst.name not in fifo_names:
+            raise ValueError(
+                f"FIFO link '{link.name}' references unknown destination FIFO '{link.dst.name}'"
+            )
 
     for worker in program.workers:
         placed_tile = worker.placement.tile
