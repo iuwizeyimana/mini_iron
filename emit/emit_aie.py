@@ -36,6 +36,9 @@ def _emit_fifo_decl(printer: Printer, fifo) -> None:
         f'aie.object_fifo @{fifo.name}({producer}, {consumers}, {fifo.depth} : {elem_type})'
     )
 
+def _emit_fifo_link_decl(printer: Printer, link) -> None:
+    printer.writeln(f"aie.object_fifo_link @{link.name}(@{link.src.name}, @{link.dst.name})")
+
 
 def _emit_worker_op(printer: Printer, op, loop_depth: int = 0) -> None:
     if isinstance(op, AcquireOp):
@@ -104,6 +107,12 @@ def emit_aie_module(program: Program) -> str:
         _emit_fifo_decl(printer, fifo)
 
     if program.fifos:
+        printer.writeln()
+    
+    for link in program.fifo_links:
+        _emit_fifo_link_decl(printer, link)
+
+    if program.fifo_links:
         printer.writeln()
 
     for worker in program.workers:
